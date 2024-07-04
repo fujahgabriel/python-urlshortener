@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>URL Shortener</title>
+  </head>
+  <body class="bg-gray-100">
+    <div
+      class="flex p-4 md:p-10 justify-center items-center h-screen text-center"
+    >
+      <div class="mx-auto">
+        <h1 class="text-3xl font-bold">URL Shortener</h1>
+        <p class="text-sm">
+          This is a simple URL shortener. Enter a URL and get a shortened
+          version of it.
+        </p>
+        <div class="bg-white rounded-md px-4 py-8 my-4 mx-auto w-75">
+          <form method="post">
+            <div class="flex flex-col">
+              <label class="text-sm text-left" for="original_url">Enter URL:</label>
+              <input
+                class="bg-gray-50 px-2 py-3 rounded-md w-full my-2"
+                type="url"
+                id="original_url"
+                name="original_url"
+                required
+              />
+              <button
+                class="bg-black text-white rounded-md px-3 py-3 text-center"
+                type="submit"
+              >
+                Shorten
+              </button>
+            </div>
+          </form>
+        </div>
+
+        {% if short_url %}
+        <div class="my-2 text-sm">
+          <p>Original URL: {{ original_url }}</p>
+          <p>
+            Shortened URL:
+            <a href="{{ url_for('redirect_to_original', short_url=short_url) }}"
+              >{{ request.host_url }}{{ short_url }}</a
+            >
+          </p>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </body>
+</html>
